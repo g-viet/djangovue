@@ -29,5 +29,6 @@ python3 manage.py migrate
 
 3. Install Django-rest-framework
 ```bash
+# Ref: http://www.django-rest-framework.org/
 pip3 install djangorestframework
 ```
