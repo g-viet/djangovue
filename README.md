@@ -1,3 +1,7 @@
+### Introduction
+
+A simple app using Django with REST + Vue.js
+
 ### Installation
 
 1. Init project & run development server:
