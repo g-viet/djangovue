@@ -28,8 +28,7 @@
         <div class="container">
             <div class="row">
                 <h1>List of Invoices
-                    <button class="btn btn-success" data-toggle="modal" data-target="#addInvoiceModal">ADD
-                        INVOICE</button>
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addInvoiceModal">ADD INVOICE</button>
                 </h1>
                 <table class="table">
                     <thead>
@@ -40,7 +39,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="invice in invoices">
+                        <tr v-for="invoice in invoices">
                             <th scope="row">${invoice.invoice_id}</th>
                             <td>${invoice.invoice_heading}</td>
                             <td>
@@ -171,6 +170,7 @@
                     this.$http.post('/api/invoice/', this.newInvoice)
                         .then((response) => {
                             this.loading = false;
+                            $("#addInvoiceModal").modal('hide');
                             this.getInvoices();
                         })
                         .catch((err) => {
@@ -184,6 +184,7 @@
                         .then((response) => {
                             this.loading = false;
                             this.currentInvoice = response.data;
+                            $("#editInvoiceModal").modal('hide');
                             this.getInvoices();
                         })
                         .catch((err) => {
