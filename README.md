@@ -37,5 +37,5 @@ pip3 install djangorestframework
 - Django-rest-framework: [ref](http://www.django-rest-framework.org/api-guide/serializers/)
 - Viewsets: [ref](http://www.django-rest-framework.org/api-guide/viewsets/)
 - Routers: [ref](http://www.django-rest-framework.org/api-guide/routers/)
-- 
 
+5. Configure Vue.js with Django

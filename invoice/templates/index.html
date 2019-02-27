@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang=”en”>
+
+<head>
+    <meta charset=”utf-8">
+    <title>Django Sample</title>
+    <meta name=”viewport” content=”width=device-width, initial-scale=1.0">
+    <meta name=”description” content=”Simple Django + Vuejs”>
+    <meta name=”keywords” content=”vuejs, django, restapi”>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.7/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+
+    <div id="starting">
+        <div class="container">
+            <div class="row">
+                <h1>List of Invoices
+                    <button class="btn btn-success" data-toggle="modal" data-target="#addInvoiceModal">ADD
+                        INVOICE</button>
+                </h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Heading</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="invice in invoices">
+                            <th scope="row">${invoice.invoice_id}</th>
+                            <td>${invoice.invoice_heading}</td>
+                            <td>
+                                <button class="btn btn-info" v-on:click="getInvoice(invoice.invoice_id)">Edit</button>
+                                <button class="btn btn-danger"
+                                    v-on:click="deleteInvoice(invoice.invoice_id)">Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="modal fade" id="addInvoiceModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">ADD INVOICE</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form v-on:submit.prevent="addInvoice()">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="invoice_heading">Invoice Heading</label>
+                                        <input type="text" class="form-control" id="invoice_heading"
+                                            placeholder="Enter Invoice Heading" v-model="newInvoice.invoice_heading"
+                                            required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="invoice_body">Invoice Body</label>
+                                        <textarea class="form-control" id="invoice_body"
+                                            placeholder="Enter Invoice Body" v-model="newInvoice.invoice_body"
+                                            required="required" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="loading" v-if="loading===true">Loading&#8230;</div>
+                </div>
+
+                <div class="modal fade" id="editInvoiceModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">EDIT INVOICE</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form v-on:submit.prevent="updateInvoice()">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="invoice_heading">Invoice Heading</label>
+                                        <input type="text" class="form-control" id="invoice_heading"
+                                            placeholder="Enter Invoice Heading" v-model="currentInvoice.invoice_heading"
+                                            required="required">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="invoice_body">Invoice Body</label>
+                                        <textarea class="form-control" id="invoice_body"
+                                            placeholder="Enter Invoice Body" v-model="currentInvoice.invoice_body"
+                                            required="required" rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary m-progress"
+                                        data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="loading" v-if="loading===true">Loading&#8230;</div>
+                </div>
+            </div>
+        </div>
+        <div class="loading" v-if="loading===true">Loading&#8230;</div>
+    </div>
+
+    <script type="text/javascript">
+        new Vue({
+            el: '#starting',
+            delimiters: ['${', '}'],
+            data: {
+                invoices: [],
+                loading: false,
+                currentInvoice: {},
+                message: null,
+                newInvoice: { 'invoice_heading': null, 'invoice_body': null }
+            },
+            mounted: function () {
+                this.getInvoices();
+            },
+            methods: {
+                getInvoices: function () {
+                    this.loading = true;
+                    this.$http.get('/api/invoice')
+                        .then((response) => {
+                            this.invoices = response.data;
+                            this.loading = false;
+                        })
+                        .catch((err) => {
+                            this.loading = false;
+                            console.log(err);
+                        })
+                },
+                getInvoice: function (id) {
+                    this.loading = true;
+                    this.$http.get(`/api/invoice/${id}`)
+                        .then((response) => {
+                            this.currentInvoice = response.data;
+                            $("#editInvoiceModal").modal('show');
+                            this.loading = false;
+                        }).catch((err) => {
+                            this.loading = false;
+                            console.log(err);
+                        })
+                },
+                addInvoice: function () {
+                    this.loading = true;
+                    this.$http.post('/api/invoice/', this.newInvoice)
+                        .then((response) => {
+                            this.loading = false;
+                            this.getInvoices();
+                        })
+                        .catch((err) => {
+                            this.loading = false;
+                            console.log(err);
+                        })
+                },
+                updateInvoice: function () {
+                    this.loading = true;
+                    this.$http.put(`/api/invoice/${this.currentInvoice.invoice_id}/`, this.currentInvoice)
+                        .then((response) => {
+                            this.loading = false;
+                            this.currentInvoice = response.data;
+                            this.getInvoices();
+                        })
+                        .catch((err) => {
+                            this.loading = false;
+                            console.log(err);
+                        })
+                },
+                deleteInvoice: function () {
+                    this.loading = true;
+                    this.$http.delete(`/api/invoice/${this.currentInvoice.invoice_id}`, this.currentInvoice)
+                        .then((response) => {
+                            this.loading = false;
+                            this.getInvoices();
+                        })
+                        .catch((err) => {
+                            this.loading = false;
+                            console.log(err);
+                        })
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
