@@ -12,3 +12,17 @@ python3 manage.py migrate
 # Try running development server
 python3 manage.py runserver
 ```
+2. Create Django app:
+```bash
+# Create Django app
+python3 manage.py startapp invoice
+
+# Create model
+# https://docs.djangoproject.com/en/2.0/topics/db/models/
+
+# Make migration
+python3 manage.py makemigrations
+
+# Migrate
+python3 manage.py migrate
+```
