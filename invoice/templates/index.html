@@ -192,9 +192,9 @@
                             console.log(err);
                         })
                 },
-                deleteInvoice: function () {
+                deleteInvoice: function (id) {
                     this.loading = true;
-                    this.$http.delete(`/api/invoice/${this.currentInvoice.invoice_id}`, this.currentInvoice)
+                    this.$http.delete(`/api/invoice/${id}`)
                         .then((response) => {
                             this.loading = false;
                             this.getInvoices();
