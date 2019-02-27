@@ -32,3 +32,10 @@ python3 manage.py migrate
 # Ref: http://www.django-rest-framework.org/
 pip3 install djangorestframework
 ```
+
+4. Create Serializer, Viewset and Routers
+- Django-rest-framework: [ref](http://www.django-rest-framework.org/api-guide/serializers/)
+- Viewsets: [ref](http://www.django-rest-framework.org/api-guide/viewsets/)
+- Routers: [ref](http://www.django-rest-framework.org/api-guide/routers/)
+- 
+
