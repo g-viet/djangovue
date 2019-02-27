@@ -26,3 +26,8 @@ python3 manage.py makemigrations
 # Migrate
 python3 manage.py migrate
 ```
+
+3. Install Django-rest-framework
+```bash
+pip3 install djangorestframework
+```
