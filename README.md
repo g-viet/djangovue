@@ -43,3 +43,6 @@ pip3 install djangorestframework
 - Routers: [ref](http://www.django-rest-framework.org/api-guide/routers/)
 
 5. Configure Vue.js with Django
+
+
+Ref: https://medium.com/quick-code/crud-app-using-vue-js-and-django-516edf4e4217
