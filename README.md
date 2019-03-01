@@ -54,5 +54,30 @@ cd frontend && npm run dev
 # then access http://127.0.0.1:8080 in browser
 ```
 
+6. Enabling CORS on Django
+```bash
+pip3 install django-cors-headers
+
+```
+
+- Add to `your_project/settings.py`:
+```
+INSTALLED_APPS = [
+    # ...
+    'corsheaders',
+]
+
+MIDDLEWARE = [
+    # ...
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8080',
+    '127.0.0.1:8080',
+)
+```
+
 
 Ref: https://medium.com/quick-code/crud-app-using-vue-js-and-django-516edf4e4217
