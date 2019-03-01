@@ -59,7 +59,6 @@ cd frontend && npm run dev
 6. Enabling CORS on Django
 ```bash
 pip3 install django-cors-headers
-
 ```
 
 - Add to `your_project/settings.py`:
@@ -118,6 +117,7 @@ export default class ModelService {
     })
   }
 }
+```
 
 9. Create sample home page:
 Check `App.vue` file
