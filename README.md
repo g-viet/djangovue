@@ -101,7 +101,25 @@ urlpatterns = [
 ]
 ```
 
+8. Make sample interface in Vue:
+- Install `axios` :
+```bash
+cd frontend && npm install --save axios
+```
 
+- Create file `./frontend/src/model/ModelService.js`:
+```
+import axios from 'axios'
+
+export default class ModelService {
+  sayHello () {
+    return axios.get('http://localhost:8000/api/public/', {headers: {}}).then((response) => {
+      return response.data || 'default value'
+    })
+  }
+}
+
+```
 
 
 Ref: https://medium.com/quick-code/crud-app-using-vue-js-and-django-516edf4e4217
