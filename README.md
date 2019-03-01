@@ -122,7 +122,17 @@ export default class ModelService {
 9. Create sample home page:
 Check `App.vue` file
 
+10. Confirm:
+```bash
+python manage.py runserver
+
+# move to the frontend directory
+cd frontend
+
+# run Vue.js in another terminal tab
+npm run dev
 ```
 
-
-Ref: https://medium.com/quick-code/crud-app-using-vue-js-and-django-516edf4e4217
+Ref:
+- https://medium.com/quick-code/crud-app-using-vue-js-and-django-516edf4e4217
+- https://auth0.com/blog/building-modern-applications-with-django-and-vuejs
