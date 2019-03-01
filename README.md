@@ -1,6 +1,6 @@
 ### Introduction
 
-A simple app using Django with REST + Vue.js
+A simple app using Django with REST + MySQL + Webpack + Vue.js
 
 ### Tutorial
 
