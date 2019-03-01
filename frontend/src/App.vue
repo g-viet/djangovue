@@ -1,13 +1,28 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div>
+    <button
+      class="btn btn-primary btn-margin"
+      @click="sayHello()">
+      Log In
+    </button>
+    {{message}}
+    <br>
   </div>
 </template>
-
 <script>
+import ModelService from './model/ModelService'
+const modelService = new ModelService()
+
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return { message: 'Initial Name' }
+  },
+  methods: {
+    sayHello () {
+      modelService.sayHello()
+    }
+  }
 }
 </script>
 

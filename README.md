@@ -119,6 +119,9 @@ export default class ModelService {
   }
 }
 
+9. Create sample home page:
+Check `App.vue` file
+
 ```
 
 
