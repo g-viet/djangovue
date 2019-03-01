@@ -62,7 +62,7 @@ pip3 install django-cors-headers
 ```
 
 - Add to `your_project/settings.py`:
-```
+```python
 INSTALLED_APPS = [
     # ...
     'corsheaders',
@@ -82,7 +82,7 @@ CORS_ORIGIN_WHITELIST = (
 
 7. Make a sample REST API:
 - Add below code to `invoice/views`:
-```
+```python
 from rest_framework.decorators import api_view
 from django.http import HttpResponse
 
@@ -91,7 +91,7 @@ def sayHello(request):
 ```
 
 - Add below code to `your_project/urls`:
-```
+```python
 from django.conf.urls import url
 from invoice import views
 
@@ -107,7 +107,7 @@ cd frontend && npm install --save axios
 ```
 
 - Create file `./frontend/src/model/ModelService.js`:
-```
+```javascript
 import axios from 'axios'
 
 export default class ModelService {
@@ -126,7 +126,6 @@ Check `App.vue` file
 ```bash
 python manage.py runserver
 
-# move to the frontend directory
 cd frontend
 
 # run Vue.js in another terminal tab
