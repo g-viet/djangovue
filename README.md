@@ -42,6 +42,8 @@ pip3 install djangorestframework
 - Viewsets: [ref](http://www.django-rest-framework.org/api-guide/viewsets/)
 - Routers: [ref](http://www.django-rest-framework.org/api-guide/routers/)
 
+Then check in browser: http://127.0.0.1:8000/invoice
+
 5. Install VueJs with webpack template
 
 ```bash
@@ -78,6 +80,28 @@ CORS_ORIGIN_WHITELIST = (
     '127.0.0.1:8080',
 )
 ```
+
+7. Make a sample REST API:
+- Add below code to `invoice/views`:
+```
+from rest_framework.decorators import api_view
+from django.http import HttpResponse
+
+def sayHello(request):
+    return HttpResponse("Hello")
+```
+
+- Add below code to `your_project/urls`:
+```
+from django.conf.urls import url
+from invoice import views
+
+urlpatterns = [
+    url(r'^api/say_hello/', views.sayHello),
+]
+```
+
+
 
 
 Ref: https://medium.com/quick-code/crud-app-using-vue-js-and-django-516edf4e4217
