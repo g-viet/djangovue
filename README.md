@@ -2,7 +2,7 @@
 
 A simple app using Django with REST + Vue.js
 
-### Installation
+### Tutorial
 
 1. Init project & run development server:
 ```bash
@@ -42,7 +42,17 @@ pip3 install djangorestframework
 - Viewsets: [ref](http://www.django-rest-framework.org/api-guide/viewsets/)
 - Routers: [ref](http://www.django-rest-framework.org/api-guide/routers/)
 
-5. Configure Vue.js with Django
+5. Install VueJs with webpack template
+
+```bash
+# Install in frontend folder
+vue init webpack frontend
+
+# Confirm installation finished:
+cd frontend && npm run dev
+
+# then access http://127.0.0.1:8080 in browser
+```
 
 
 Ref: https://medium.com/quick-code/crud-app-using-vue-js-and-django-516edf4e4217
